@@ -1,0 +1,19 @@
+{
+  "name": "flowregime",
+  "version": "1.0.0",
+  "description": "## 功能 使用`hooks+context`的形式实现对项目状态管理的组件",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickLJudy/flowRegime.git"
+  },
+  "author": "galenyoung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickLJudy/flowRegime/issues"
+  },
+  "homepage": "https://github.com/NickLJudy/flowRegime#readme"
+}
