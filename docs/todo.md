@@ -1,5 +1,5 @@
-[x] add init state 
-[ ] add ts
-[ ] add demo
-[ ] add playback ？
-[ ] add icon
+- [x] add init state: 0.0.2 done!
+- [ ] add ts: 0.1.0 todo
+- [ ] add demo: 0.1.1 todo
+- [ ] add playback？: 0.2.0 todo 
+- [ ] add icon: 0.2.1 todo
