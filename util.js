@@ -1,6 +1,3 @@
-/**
-* @description: 常用类型检查
-*/
 export function checkType(param) {
   if (param === null) return null;
 
@@ -82,14 +79,20 @@ export function assignDeep(...objects) {
 }
 
 /**
- * @description 判断俩个变量关系
- * @returns
- *  equal 简单类型 相等
- *    包含 undefined
- *  different 不同
- *  same 非简单类型，内存地址相同
- *    包含 null
- *  similar 非简单类型，内存地址不同，数据一致
+ * @description: determine the relationship between two variables.
+ * @param {any} Must
+ * @param {any} Must
+ * @returns {string}
+ *  possible values
+ *    equal 
+ *      primitive types => equality
+ *      includes: undefined
+ *    different
+ *    same 
+ *      structural types => same memory address
+ *      includes: null
+ *    similar 
+ *      structural type => the memory address is different, the data is consistent
 */
 export function variableRelation(...rest) {
   if (rest.length < 2) throw new Error('Util-variableRelation: Missing parameter!');

@@ -1,7 +1,7 @@
 {
   "name": "flowregime",
-  "version": "1.0.0",
-  "description": "## 功能 使用`hooks+context`的形式实现对项目状态管理的组件",
+  "version": "0.0.1",
+  "description": "FlowRegime is a component that uses `hooks+context` for state management with React.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,16 @@
     "url": "git+https://github.com/NickLJudy/flowRegime.git"
   },
   "author": "galenyoung",
-  "license": "ISC",
+  "keywords": [
+    "flowregime",
+    "state management",
+    "data flow",
+    "react",
+    "reactjs",
+    "js"
+
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/NickLJudy/flowRegime/issues"
   },
