@@ -36,8 +36,11 @@ Expose two APIs.
 ### ctrlState
 * The logic is similar to `useState`.
   ```js
+  const [state,dispatch] = ctrlState(stateSign,initState);
+  
+  //eq:
   const  [multiCount,setMultiCount]= ctrlState(`MULTI-SIGN-${val}`); //independent context
-  const  [count,setCount]= ctrlState(`COUNT`); //shared context
+  const  [count,setCount]= ctrlState(`COUNT`,{num:1}); //shared context
   ```
   * Similarities
     * The first item of the array returned is the defined `state`.
@@ -47,8 +50,9 @@ Expose two APIs.
       * Because it uses a hook internally.
   * Differences
     * The state declared by ctrlState is available globally (under the `StateWrapper` component).
-    * The parameters received by `ctrlState` are the identity of the declaration.
+    * The first parameter that `ctrlState` receives is the identity of the declaration.
       * This can be any type, but it is recommended to use the `string` or `symbol` type as the identifier.
+    * The second parameter that ctrlState receives is the initial value of state.
     * Under each different identifier.
       * `state` is independent of each other and does not influence each other.
       * The `dispatch` method also changes only for states under the same identity.

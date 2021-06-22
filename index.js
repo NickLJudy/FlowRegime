@@ -31,7 +31,7 @@ function StateWrapper({ children }) {
     return { ...state, ...obj };
   };
 
-  ctrlState = type => {
+  ctrlState = (type,initState) => {
     let { types } = state;
 
     if (isMulti(type) && !types.has(type)) dispatch({ type });
@@ -44,7 +44,7 @@ function StateWrapper({ children }) {
     const singleState = useContext(repos.get(SingleContextType));
 
     return [
-      singleState?.[type],
+      singleState?.[type] || initState,
       val => {
         let valueObj = {};
         valueObj[type] = val;

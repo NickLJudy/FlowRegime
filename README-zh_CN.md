@@ -22,8 +22,11 @@
 ### ctrlState
 * 使用逻辑和`useState`相似
   ```js
+  const [state,dispatch] = ctrlState(stateSign,initState);
+  
+  //eq:
   const  [multiCount,setMultiCount]= ctrlState(`MULTI-SIGN-${val}`); //独立context形式
-  const  [count,setCount]= ctrlState(`COUNT`); //共享context形式
+  const  [count,setCount]= ctrlState(`COUNT`,{num:1}); //共享context形式
   ```
   * 相同之处
     * 返回的数组第一个item是定义的 `state`
@@ -33,8 +36,9 @@
       * 因为其内部使用了hook
   * 不同之处
     * ctrlState声明的state在项目全局（`StateWrapper`组件包裹之下）可用
-    * ctrlState接收的参数是该声明的标识
+    * ctrlState接收的第一个参数是该声明的标识
       * 可以是任何类型,不过建议使用`string`或`symbol`类型作为标识
+    * ctrlState接收的第二个参数是state初始值
     * 每个不同标识下
       * `state`相互独立，互不影响
       * `dispatch`方法也只针对相同标识下的state进行变更
