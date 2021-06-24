@@ -1,4 +1,4 @@
-  language: node_js # 你用啥语言？这里node
+  language: node_js
   node_js:
     - stable
   install:
