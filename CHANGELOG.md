@@ -9,3 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 - add initState
+
+## [v1.2.0](https://github.com/NickLJudy/FlowRegime/commit/cbde5485bf92b9bb20a0c5bfbf64471946e9dabb) - 2021-06-24
+### Commits
+- add rollup
+- add compression
