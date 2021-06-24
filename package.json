@@ -4,7 +4,7 @@
   "description": "FlowRegime is a component that uses `hooks+context` for state management with React.",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js --environment INCLUDE_DEPS,BUILD:production"
   },
   "repository": {
     "type": "git",

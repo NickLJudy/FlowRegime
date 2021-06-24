@@ -3,9 +3,11 @@ import pkg from './package.json';
 
 const input = 'src/index.js';
 const external = Object.keys(pkg.peerDependencies || {});
-const env = process.env.NODE_ENV;
+const env = process.env.BUILD;
+const ProdEnv = env === 'production'; 
+const CompressionPrefix = ProdEnv ? '.min' : '';
 const plugins = [terser(
-  env === 'production' ? 
+  ProdEnv ? 
   {
     compress: {
       pure_getters: true,
@@ -17,11 +19,11 @@ const plugins = [terser(
 )];
 const output = [
   {
-    file: './dist/flowregime.esm.js',
+    file: `./dist/flowregime.esm${CompressionPrefix}.js`,
     format: 'esm',
   },
   {
-    file: './dist/flowregime.js',
+    file: `./dist/flowregime${CompressionPrefix}.js`,
     format: 'cjs',
   },
 ];
