@@ -14,3 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Commits
 - add rollup
 - add compression
+
+## [v1.2.1](https://github.com/NickLJudy/FlowRegime/commit/ba43350e147f979f1760a74c2ce7bde2aae5069d) - 2021-06-24
+### Commits
+- bugfixed: import error!
