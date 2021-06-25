@@ -1,8 +1,16 @@
 {
   "name": "flowregime",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "FlowRegime is a component that uses `hooks+context` for state management with React.",
-  "main": "index.js",
+  "main": "lib/flowregime.js",
+  "unpkg": "dist/flowregime.js",
+  "module": "esm/flowregime.js",
+  "files": [
+    "dist",
+    "lib",
+    "esm",
+    "src"
+  ],
   "scripts": {
     "build": "rollup -c rollup.config.js --environment INCLUDE_DEPS,BUILD:production"
   },
