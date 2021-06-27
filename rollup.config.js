@@ -3,26 +3,23 @@ import pkg from './package.json';
 
 const input = 'src/index.js';
 const external = Object.keys(pkg.peerDependencies || {});
-const env = process.env.BUILD;
-const ProdEnv = env === 'production';
-const CompressionPrefix = ProdEnv ? '.min' : '';
+
 const plugins = [terser(
-  ProdEnv ?
-    {
-      compress: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false,
-      },
-    } : ''
+  {
+    compress: {
+      pure_getters: true,
+      unsafe: true,
+      unsafe_comps: true,
+      warnings: false,
+    },
+  }
 )];
 
 export default [
   //CommonJS
   {
     input,
-    output: { file: `lib/flowregime${CompressionPrefix}.js`, format: 'cjs', indent: false },
+    output: { file: 'lib/flowregime.js', format: 'cjs', indent: false },
     external,
     plugins,
   },
@@ -30,7 +27,7 @@ export default [
   //ESM
   {
     input,
-    output: { file: `esm/flowregime${CompressionPrefix}.js`, format: 'esm', indent: false },
+    output: { file: 'esm/flowregime.js', format: 'esm', indent: false },
     external,
     plugins,
   },
@@ -39,7 +36,7 @@ export default [
   {
     input,
     output: {
-      file: `dist/flowregime${CompressionPrefix}.js`,
+      file: 'dist/flowregime.js',
       format: 'umd',
       name: 'FlowRegime',
       indent: false

@@ -12,7 +12,7 @@
     "src"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.js --environment INCLUDE_DEPS,BUILD:production"
+    "build": "rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
