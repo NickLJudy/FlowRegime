@@ -18,3 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v1.2.1](https://github.com/NickLJudy/FlowRegime/commit/ba43350e147f979f1760a74c2ce7bde2aae5069d) - 2021-06-24
 ### Commits
 - bugfixed: import error!
+
+## [v2.0.0]() - 2021-06-27
+### Commits
+- API changes:ctrlState => useCtrlState
