@@ -28,6 +28,7 @@
     "js"
   ],
   "license": "MIT",
+  "sideEffects": false,
   "bugs": {
     "url": "https://github.com/NickLJudy/FlowRegime/issues"
   },

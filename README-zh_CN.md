@@ -18,26 +18,26 @@
   )
   ```
 
-### ctrlState
+### useCtrlState
 * 使用逻辑和`useState`相似
   ```js
-  const [state,dispatch] = ctrlState(stateSign,initState);
+  const [state,dispatch] = useCtrlState(stateSign,initState);
   
   //eq:
-  const  [multiCount,setMultiCount]= ctrlState(`MULTI-SIGN-${val}`); //独立context形式
-  const  [count,setCount]= ctrlState(`COUNT`,{num:1}); //共享context形式
+  const  [multiCount,setMultiCount]= useCtrlState(`MULTI-SIGN-${val}`); //独立context形式
+  const  [count,setCount]= useCtrlState(`COUNT`,{num:1}); //共享context形式
   ```
   * 相同之处
     * 返回的数组第一个item是定义的 `state`
       * 默认返回`undefined`
     * 返回的数组第二个item是设置该state的`dispatch`方法
-    * 只能在函数最外层调用 `ctrlState`。不要在循环、条件判断或者子函数中调用。
+    * 只能在函数最外层调用 `useCtrlState`。不要在循环、条件判断或者子函数中调用。
       * 因为其内部使用了hook
   * 不同之处
-    * ctrlState声明的state在项目全局（`StateWrapper`组件包裹之下）可用
-    * ctrlState接收的第一个参数是该声明的标识
+    * useCtrlState声明的state在项目全局（`StateWrapper`组件包裹之下）可用
+    * useCtrlState接收的第一个参数是该声明的标识
       * 可以是任何类型,不过建议使用`string`或`symbol`类型作为标识
-    * ctrlState接收的第二个参数是state初始值
+    * useCtrlState接收的第二个参数是state初始值
     * 每个不同标识下
       * `state`相互独立，互不影响
       * `dispatch`方法也只针对相同标识下的state进行变更
