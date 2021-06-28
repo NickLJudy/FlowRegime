@@ -21,7 +21,7 @@ export default [
     input,
     output: { file: 'lib/flowregime.js', format: 'cjs', indent: false },
     external,
-    plugins,
+    // plugins,
   },
 
   //ESM
@@ -29,7 +29,7 @@ export default [
     input,
     output: { file: 'esm/flowregime.js', format: 'esm', indent: false },
     external,
-    plugins,
+    // plugins,
   },
 
   //UMD
@@ -42,6 +42,20 @@ export default [
       indent: false
     },
     external,
+    // plugins,
+  },
+
+  //UMD Production
+  {
+    input,
+    output: {
+      file: 'dist/flowregime.min.js',
+      format: 'umd',
+      name: 'FlowRegime',
+      indent: false
+    },
+    external,
     plugins,
   },
+
 ]
