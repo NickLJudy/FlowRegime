@@ -1,4 +1,4 @@
-export function checkType(param) {
+export function checkType(param: any) {
   if (param === null) return null;
 
   if (typeof param !== "object") return typeof param;
@@ -54,11 +54,11 @@ export function checkType(param) {
   return type;
 }
 
-export function isType(param, type = 'object') {
+export function isType(param: null, type = 'object') {
   return checkType(param) === type;
 }
 
-export function assignDeep(...objects) {
+export function assignDeep(...objects: any[]) {
   return objects.reduce((accumulator, currentValue) => {
     Object.keys(currentValue).forEach(key => {
       const pVal = accumulator[key];
@@ -94,14 +94,14 @@ export function assignDeep(...objects) {
  *    SIMILAR 
  *      structural type => the memory address is DIFF, the data is consistent
 */
-export function variableRelation(...rest) {
+export function variableRelation(...rest: any[]) {
   if (rest.length < 2) throw new Error('Util-variableRelation: Missing parameter!');
 
   const [param1, param2] = rest;
 
   if (checkType(param1) !== checkType(param2)) return 'DIFF';
 
-  const deterministicType = (t, p = param1) => isType(p, t);
+  const deterministicType = (t: string | undefined, p = param1) => isType(p, t);
 
   if (typeof param1 !== 'object' && typeof param2 !== 'object') {
 
@@ -124,7 +124,7 @@ export function variableRelation(...rest) {
   if (deterministicType('array')) {
     if (param1.length !== param2.length) return 'DIFF';
 
-    if (param1.some((v, i) => !isEqual(v, param2[i]))) return 'DIFF';
+    if (param1.some((v: any, i: string | number) => !isEqual(v, param2[i]))) return 'DIFF';
 
     return 'SIMILAR';
   }
@@ -144,11 +144,11 @@ export function variableRelation(...rest) {
 
 }
 
-export function isEqual(...rest) {
+export function isEqual(...rest: any[]) {
   return variableRelation(...rest) !== 'DIFF';
 }
 
-export function compose(...rest) {
+export function compose(...rest: any[]) {
   if (rest.length === 0) return;
   if (rest.length === 1) {
     const [param] = rest;
@@ -158,7 +158,7 @@ export function compose(...rest) {
   return rest.reverse().reduce((acc, fn) => fn(acc));
 }
 
-export function mergeMap(...rest) {
+export function mergeMap(...rest: any[]) {
   return new Map(rest.reduce((acc, item) => [...acc, ...item], []));
 }
 

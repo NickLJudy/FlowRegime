@@ -1,19 +1,13 @@
 import { terser } from "rollup-plugin-terser";
+import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
-const input = 'src/index.js';
+const input = 'src/index.ts';
 const external = Object.keys(pkg.peerDependencies || {});
 
-const plugins = [terser(
-  {
-    compress: {
-      pure_getters: true,
-      unsafe: true,
-      unsafe_comps: true,
-      warnings: false,
-    },
-  }
-)];
+const plugins = [
+  typescript({ tsconfigOverride: { compilerOptions: { declaration: false } } }),
+];
 
 export default [
   //CommonJS
@@ -21,7 +15,7 @@ export default [
     input,
     output: { file: 'lib/flowregime.js', format: 'cjs', indent: false },
     external,
-    // plugins,
+    plugins,
   },
 
   //ESM
@@ -29,7 +23,7 @@ export default [
     input,
     output: { file: 'esm/flowregime.js', format: 'esm', indent: false },
     external,
-    // plugins,
+    plugins,
   },
 
   //UMD
@@ -42,7 +36,7 @@ export default [
       indent: false
     },
     external,
-    // plugins,
+    plugins,
   },
 
   //UMD Production
@@ -55,7 +49,18 @@ export default [
       indent: false
     },
     external,
-    plugins,
+    plugins: plugins.push(
+      terser(
+        {
+          compress: {
+            pure_getters: true,
+            unsafe: true,
+            unsafe_comps: true,
+            warnings: false,
+          },
+        }
+      )
+    ),
   },
 
 ]
