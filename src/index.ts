@@ -1,10 +1,11 @@
 import { createElement, createContext, useReducer, useContext, } from 'react';
-import { isType, variableRelation, compose, } from './util';
+import { isType, variableRelation, compose, objAssign, } from './util';
 
 const SingleContextType = Symbol("A separate context type.");
 const multi = (str: any) => String(str).indexOf('MULTI-') === 0;
-let repos:any = new Map([[SingleContextType, createContext(null)]]);
-let types:any = new Set([SingleContextType]);
+let repos: any = new Map([[SingleContextType, createContext(null)]]);
+let types: any = new Set([SingleContextType]);
+
 let _dispatch: Function;
 let _globalState: any;
 // function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
@@ -12,7 +13,7 @@ let _globalState: any;
 // };
 
 export function StateWrapper({ children }: any) {
-  const [globalState, dispatch]:any[] = useReducer(reducer, {});
+  const [globalState, dispatch]: any[] = useReducer(reducer, {});
   _dispatch = dispatch;
   function reducer(state: { [x: string]: any; }, action: { type: any; value: any; }) {
     let { type, value } = action;
@@ -29,12 +30,9 @@ export function StateWrapper({ children }: any) {
     if (Relation === 'SAME') throw new Error('The state shouldn\'t appear in dispatch.');
     if (Relation !== 'DIFF') return state;
 
-    obj[type] = isType(state[type]) && isType(value) ? { ...state[type], ...value } : value;
+    obj[type] = isType(state[type]) && isType(value) ? objAssign(state[type], value) : value;
 
-    _globalState = {
-      ...state,
-      ...obj,
-    };
+    _globalState = objAssign(state, obj);
 
     return _globalState;
   };
@@ -45,7 +43,7 @@ export function StateWrapper({ children }: any) {
     return (children: any) => createElement(Provider, { value: globalState[type] }, children);
   }
 
-  const reposArr = Array.from(repos).map((repo:any) => renderTmp(repo));
+  const reposArr = Array.from(repos).map((repo: any) => renderTmp(repo));
   if (repos.size > 0) return compose(...reposArr, children);
 
   return children;
@@ -59,20 +57,17 @@ export function useCtrlState(type: string | number | symbol, initState: any) {
     (value: any) => _dispatch({ type, value }),
   ];
 
-  const singleState:any = useContext(repos.get(SingleContextType));
+  const singleState: any = useContext(repos.get(SingleContextType));
 
   return [
     singleState?.[type] || initState,
     (val: any) => {
-      let valueObj:any = {};
+      let valueObj: any = {};
       valueObj[type] = val;
 
       return _dispatch({
         type: SingleContextType,
-        value: {
-          ..._globalState?.[SingleContextType]?.[type] || {},
-          ...valueObj,
-        }
+        value: objAssign(_globalState?.[SingleContextType]?.[type] || {}, valueObj)
       });
     }
   ]

@@ -54,7 +54,7 @@ export function checkType(param: any) {
   return type;
 }
 
-export function isType(param: null, type = 'object') {
+export function isType(param: any, type = 'object') {
   return checkType(param) === type;
 }
 
@@ -124,7 +124,7 @@ export function variableRelation(...rest: any[]) {
   if (deterministicType('array')) {
     if (param1.length !== param2.length) return 'DIFF';
 
-    if (param1.some((v: any, i: string | number) => !isEqual(v, param2[i]))) return 'DIFF';
+    if (param1.some((v: any, i: number) => !isEqual(v, param2[i]))) return 'DIFF';
 
     return 'SIMILAR';
   }
@@ -162,6 +162,10 @@ export function mergeMap(...rest: any[]) {
   return new Map(rest.reduce((acc, item) => [...acc, ...item], []));
 }
 
+export function objAssign(...rest:(object[])):object {
+  return Object.assign({},...rest);
+}
+
 export default {
   checkType,
   isType,
@@ -170,4 +174,5 @@ export default {
   isEqual,
   compose,
   mergeMap,
+  objAssign,
 }

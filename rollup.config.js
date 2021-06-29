@@ -15,7 +15,9 @@ export default [
     input,
     output: { file: 'lib/flowregime.js', format: 'cjs', indent: false },
     external,
-    plugins,
+    plugins:[
+      typescript({ useTsconfigDeclarationDir: true }),
+    ]
   },
 
   //ESM

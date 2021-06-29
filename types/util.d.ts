@@ -1,5 +1,5 @@
 export declare function checkType(param: any): string | null;
-export declare function isType(param: null, type?: string): boolean;
+export declare function isType(param: any, type?: string): boolean;
 export declare function assignDeep(...objects: any[]): any;
 /**
  * @description: determine the relationship between two variables.
@@ -21,6 +21,7 @@ export declare function variableRelation(...rest: any[]): "DIFF" | "EQUAL" | "SA
 export declare function isEqual(...rest: any[]): boolean;
 export declare function compose(...rest: any[]): any;
 export declare function mergeMap(...rest: any[]): Map<unknown, unknown>;
+export declare function objAssign(...rest: (object[])): object;
 declare const _default: {
     checkType: typeof checkType;
     isType: typeof isType;
@@ -29,5 +30,6 @@ declare const _default: {
     isEqual: typeof isEqual;
     compose: typeof compose;
     mergeMap: typeof mergeMap;
+    objAssign: typeof objAssign;
 };
 export default _default;

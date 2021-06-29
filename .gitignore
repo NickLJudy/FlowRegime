@@ -2,6 +2,7 @@
 dist
 lib
 esm
+types
 
 # Logs
 logs
