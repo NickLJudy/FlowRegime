@@ -33,3 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrite the code using only TypeScript.
 - Add examples.
 
+## [v2.0.3](https://github.com/NickLJudy/FlowRegime/commit/891567b27da1a1bb9368fede1bd61e7d5767f6b8) - 2021-06-29
+### Commits
+- Add TypeScript declarations.
