@@ -6,6 +6,7 @@ English | [简体中文](./README-zh_CN.md)
 
 [![Build Status](https://travis-ci.com/NickLJudy/FlowRegime.svg?branch=main)](https://travis-ci.com/NickLJudy/FlowRegime)
 [![Version](https://img.shields.io/npm/v/flowregime.svg?maxAge=300&label=version&colorB=007ec6&maxAge=300)](./package.json)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/flowregime)](https://bundlephobia.com/package/flowregime)
 ![GitHub](https://img.shields.io/github/license/NickLJudy/FlowRegime)
 ![https://github.com/NickLJudy/FlowRegime/commits/main](https://img.shields.io/github/last-commit/NickLJudy/FlowRegime)
 

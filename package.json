@@ -5,14 +5,17 @@
   "main": "lib/flowregime.js",
   "unpkg": "dist/flowregime.js",
   "module": "esm/flowregime.js",
+  "types": "types/index.d.ts",
   "files": [
     "dist",
     "lib",
     "esm",
-    "src"
+    "src",
+    "types"
   ],
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "check-types": "tsc"
   },
   "repository": {
     "type": "git",

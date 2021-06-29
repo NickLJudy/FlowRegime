@@ -27,3 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v2.0.1](https://github.com/NickLJudy/FlowRegime/commit/0d23bed9be3c2b7b85d406cea5a3756c72020af7) - 2021-06-27
 ### Commits
 - Change log.
+
+## [v2.0.2](https://github.com/NickLJudy/FlowRegime/commit/2e1f0f4d382e1d080c69b95aa45fad9aa2e5e78e) - 2021-06-29
+### Commits
+- Rewrite the code using only TypeScript.
+- Add examples.
+
