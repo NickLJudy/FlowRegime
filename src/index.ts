@@ -29,9 +29,7 @@ export function StateWrapper({ children }: any) {
     if (Relation === 'SAME') throw new Error('The state shouldn\'t appear in dispatch.');
     if (Relation !== 'DIFF') return state;
 
-    // if(isValidKey(type,obj)){
     obj[type] = isType(state[type]) && isType(value) ? { ...state[type], ...value } : value;
-    // }
 
     _globalState = {
       ...state,
@@ -72,7 +70,7 @@ export function useCtrlState(type: string | number | symbol, initState: any) {
       return _dispatch({
         type: SingleContextType,
         value: {
-          ..._globalState[SingleContextType]?.[type] || {},
+          ..._globalState?.[SingleContextType]?.[type] || {},
           ...valueObj,
         }
       });

@@ -4,9 +4,9 @@ import pkg from './package.json';
 
 const input = 'src/index.ts';
 const external = Object.keys(pkg.peerDependencies || {});
-
+const noDeclarationFiles = { compilerOptions: { declaration: false } }
 const plugins = [
-  typescript({ tsconfigOverride: { compilerOptions: { declaration: false } } }),
+  typescript({ tsconfigOverride: noDeclarationFiles }),
 ];
 
 export default [
@@ -50,7 +50,7 @@ export default [
     },
     external,
     plugins: [
-      typescript({ tsconfigOverride: { compilerOptions: { declaration: false } } }),
+      typescript({ tsconfigOverride: noDeclarationFiles }),
       terser(
         {
           compress: {

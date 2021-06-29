@@ -23,7 +23,7 @@ Or if you're using [yarn](https://classic.yarnpkg.com/en/docs/install/):
 yarn add flowregime
 ```
 
-## Introduction
+## Usage
 Expose two APIs.
 
 ### StateWrapper
