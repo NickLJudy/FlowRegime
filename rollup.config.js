@@ -49,7 +49,8 @@ export default [
       indent: false
     },
     external,
-    plugins: plugins.push(
+    plugins: [
+      typescript({ tsconfigOverride: { compilerOptions: { declaration: false } } }),
       terser(
         {
           compress: {
@@ -60,7 +61,7 @@ export default [
           },
         }
       )
-    ),
+    ],
   },
 
 ]

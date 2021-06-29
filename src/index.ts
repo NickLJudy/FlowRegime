@@ -3,15 +3,16 @@ import { isType, variableRelation, compose, } from './util';
 
 const SingleContextType = Symbol("A separate context type.");
 const multi = (str: any) => String(str).indexOf('MULTI-') === 0;
-let repos = new Map([[SingleContextType, createContext(null)]]);
-let types = new Set([SingleContextType]);
-let _dispatch: any;
-function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
-  return key in object;
-};
+let repos:any = new Map([[SingleContextType, createContext(null)]]);
+let types:any = new Set([SingleContextType]);
+let _dispatch: Function;
+let _globalState: any;
+// function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
+//   return key in object;
+// };
 
-export function StateWrapper({ children }:any) {
-  const [globalState, dispatch] = useReducer(reducer, {});
+export function StateWrapper({ children }: any) {
+  const [globalState, dispatch]:any[] = useReducer(reducer, {});
   _dispatch = dispatch;
   function reducer(state: { [x: string]: any; }, action: { type: any; value: any; }) {
     let { type, value } = action;
@@ -23,28 +24,30 @@ export function StateWrapper({ children }:any) {
       return state;
     }
     const Relation = variableRelation(state[type], value);
-    let obj = {}
+    let obj: { [index: string]: any } = {}
 
     if (Relation === 'SAME') throw new Error('The state shouldn\'t appear in dispatch.');
     if (Relation !== 'DIFF') return state;
 
-    if(isValidKey(type,obj)){
-      obj[type] = isType(state[type]) && isType(value) ? { ...state[type], ...value } : value;
-    }
-    
-    return {
+    // if(isValidKey(type,obj)){
+    obj[type] = isType(state[type]) && isType(value) ? { ...state[type], ...value } : value;
+    // }
+
+    _globalState = {
       ...state,
       ...obj,
     };
+
+    return _globalState;
   };
 
-  function renderTmp([type, store]:[any,any]) {
+  function renderTmp([type, store]: [any, any]) {
     const { Provider } = store;
 
-    return (children:any) => createElement(Provider, { value: globalState[type] }, children);
+    return (children: any) => createElement(Provider, { value: globalState[type] }, children);
   }
 
-  const reposArr = Array.from(repos).map(repo => renderTmp(repo));
+  const reposArr = Array.from(repos).map((repo:any) => renderTmp(repo));
   if (repos.size > 0) return compose(...reposArr, children);
 
   return children;
@@ -58,18 +61,18 @@ export function useCtrlState(type: string | number | symbol, initState: any) {
     (value: any) => _dispatch({ type, value }),
   ];
 
-  const singleState = useContext(repos.get(SingleContextType));
+  const singleState:any = useContext(repos.get(SingleContextType));
 
   return [
     singleState?.[type] || initState,
     (val: any) => {
-      let valueObj = {};
+      let valueObj:any = {};
       valueObj[type] = val;
 
       return _dispatch({
         type: SingleContextType,
         value: {
-          ...SingleContextType?.[type] || {},
+          ..._globalState[SingleContextType]?.[type] || {},
           ...valueObj,
         }
       });
