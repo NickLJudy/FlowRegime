@@ -30,6 +30,7 @@
   * 相同之处
     * 返回的数组第一个item是定义的 `state`
       * 默认返回`undefined`
+      * 注意：默认的state不会与后续通过dispatch更新的state合并。
     * 返回的数组第二个item是设置该state的`dispatch`方法
     * 只能在函数最外层调用 `useCtrlState`。不要在循环、条件判断或者子函数中调用。
       * 因为其内部使用了hook

@@ -54,7 +54,7 @@ export function checkType(param: any) {
   return type;
 }
 
-export function isType(param: any, type = 'object') {
+export function typeCheck(param: any, type = 'object') {
   return checkType(param) === type;
 }
 
@@ -67,7 +67,7 @@ export function assignDeep(...objects: any[]) {
       // if (Array.isArray(pVal) && Array.isArray(oVal)) {
       //   accumulator[key] = pVal.concat(...oVal);
       // } else 
-      if (isType(pVal) && isType(oVal)) {
+      if (typeCheck(pVal) && typeCheck(oVal)) {
         accumulator[key] = assignDeep(pVal, oVal);
       } else {
         accumulator[key] = oVal;
@@ -101,7 +101,7 @@ export function variableRelation(...rest: any[]) {
 
   if (checkType(param1) !== checkType(param2)) return 'DIFF';
 
-  const deterministicType = (t: string | undefined, p = param1) => isType(p, t);
+  const deterministicType = (t: string | undefined, p = param1) => typeCheck(p, t);
 
   if (typeof param1 !== 'object' && typeof param2 !== 'object') {
 
@@ -168,7 +168,7 @@ export function objAssign(...rest:(object[])):object {
 
 export default {
   checkType,
-  isType,
+  typeCheck,
   assignDeep,
   variableRelation,
   isEqual,

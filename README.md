@@ -52,6 +52,7 @@ Expose two APIs.
   * Similarities
     * The first item of the array returned is the defined `state`.
       * Default value：`undefined`.
+      * **Notice**:The default state set doesn't merge with subsequent states。
     * The second item of the array returned is the `dispatch` method that sets the state.
     * `useCtrlState` can only be called on the outermost layer of a function. Do not call in loops, conditionals, or subfunctions.
       * Because it uses a hook internally.

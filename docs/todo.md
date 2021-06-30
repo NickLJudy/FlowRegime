@@ -1,7 +1,7 @@
-- [x] add init state: 1.1.0 done!
-- [x] add rollup 1.2.0
-- [ ] add ts: 1.3.0 todo
-- [ ] add demo: 1.4.0 todo
-- [ ] add playback？: 1.5.0 todo 
-- [ ] add icon: 1.5.1 todo
-- [ ] add custom hook
+- [x] add init state
+- [x] add rollup
+- [x] add ts
+- [x] add demo
+- [x] add custom hook
+- [ ] add playback？
+- [ ] add icon

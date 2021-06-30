@@ -1,5 +1,5 @@
 import { createElement, createContext, useReducer, useContext, } from 'react';
-import { isType, variableRelation, compose, objAssign, } from './util';
+import { typeCheck, variableRelation, compose, objAssign, } from './util';
 
 const SingleContextType = Symbol("A separate context type.");
 const multi = (str: any) => String(str).indexOf('MULTI-') === 0;
@@ -30,7 +30,7 @@ export function StateWrapper({ children }: any) {
     if (Relation === 'SAME') throw new Error('The state shouldn\'t appear in dispatch.');
     if (Relation !== 'DIFF') return state;
 
-    obj[type] = isType(state[type]) && isType(value) ? objAssign(state[type], value) : value;
+    obj[type] = typeCheck(state[type]) && typeCheck(value) ? objAssign(state[type], value) : value;
 
     _globalState = objAssign(state, obj);
 
@@ -62,12 +62,14 @@ export function useCtrlState(type: string | number | symbol, initState: any) {
   return [
     singleState?.[type] || initState,
     (val: any) => {
-      let valueObj: any = {};
-      valueObj[type] = val;
+      let value:any = {};
+      value[type] = typeCheck(val) ?
+        objAssign(_globalState?.[SingleContextType]?.[type] || {}, val) :
+        val;
 
       return _dispatch({
         type: SingleContextType,
-        value: objAssign(_globalState?.[SingleContextType]?.[type] || {}, valueObj)
+        value,
       });
     }
   ]

@@ -10,6 +10,22 @@ function forEach(num, multiple) {
   return arr.map((Item, key) => <Father1 val={key} multiple={multiple} key={key} />)
 };
 
+function turn(obj){
+  let i = 0;
+  let arr = ['a','b','c','d','e'];
+
+  return function(){
+    if(i < 1) obj[ arr[0] ]=i;
+    if(i < 5){
+      obj = {};
+      obj.a = i;
+      obj[ arr[i] ] = 5;
+    };
+    i++;
+    return obj;
+  }
+}
+const fifthDoIt = turn({});
 export default function App() {
   function getSearchObjFn() {
     const query = window.location.search.substring(1).split("&");
@@ -21,7 +37,7 @@ export default function App() {
       return acc;
     }, {});
   }
-  const { multiple, num = 10 } = getSearchObjFn();
+  const { multiple, num = 1 } = getSearchObjFn();
   return <>
     祖父组件 { forEach(num, multiple)}
   </>
@@ -31,7 +47,7 @@ function Father1({ val, multiple }) {
   const innerMulti = multiple === 'false' ? false : Boolean(multiple);
   const [state, dispatch] = useCtrlState(`${innerMulti ? 'MULTI-' : ''}SIGN-${val}`, { a: 3, b: 2 });
   console.log(state);
-  return <div onClick={() => dispatch({ a: state.a + 1, c: 1 })}>
+  return <div onClick={() => dispatch( fifthDoIt() )}>
     父组件{val}的state值：{state?.a || 0}
   </div>;
 }
