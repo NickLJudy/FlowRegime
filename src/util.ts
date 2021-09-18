@@ -1,3 +1,5 @@
+export type IStatusVal = object | string | number | bigint;
+
 export function checkType(param: any) {
   if (param === null) return null;
 
@@ -56,26 +58,6 @@ export function checkType(param: any) {
 
 export function typeCheck(param: any, type = 'object') {
   return checkType(param) === type;
-}
-
-export function assignDeep(...objects: any[]) {
-  return objects.reduce((accumulator, currentValue) => {
-    Object.keys(currentValue).forEach(key => {
-      const pVal = accumulator[key];
-      const oVal = currentValue[key];
-
-      // if (Array.isArray(pVal) && Array.isArray(oVal)) {
-      //   accumulator[key] = pVal.concat(...oVal);
-      // } else 
-      if (typeCheck(pVal) && typeCheck(oVal)) {
-        accumulator[key] = assignDeep(pVal, oVal);
-      } else {
-        accumulator[key] = oVal;
-      }
-    });
-
-    return accumulator;
-  }, {});
 }
 
 /**
@@ -162,17 +144,20 @@ export function mergeMap(...rest: any[]) {
   return new Map(rest.reduce((acc, item) => [...acc, ...item], []));
 }
 
-export function objAssign(...rest:(object[])):object {
-  return Object.assign({},...rest);
+export function objAssign(...rest: (object[])) {
+  return Object.assign({}, ...rest);
 }
+
+export const isDev = process.env.NODE_ENV !== 'production';
+
 
 export default {
   checkType,
   typeCheck,
-  assignDeep,
   variableRelation,
   isEqual,
   compose,
   mergeMap,
   objAssign,
+  isDev,
 }

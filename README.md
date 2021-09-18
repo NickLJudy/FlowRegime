@@ -25,7 +25,7 @@ yarn add flowregime
 ```
 
 ## Usage
-Expose two APIs.
+There are only two APIs:
 
 ### StateWrapper
 * Wrap the top layer of your application.
