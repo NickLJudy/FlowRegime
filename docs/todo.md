@@ -1,7 +1,0 @@
-- [x] add init state
-- [x] add rollup
-- [x] add ts
-- [x] add demo
-- [x] add custom hook
-- [ ] add playback？
-- [ ] add icon
