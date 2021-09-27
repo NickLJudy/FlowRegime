@@ -1,4 +1,4 @@
-# 关于 flowRegime状态管理组件
+# 关于 flowregime状态管理组件
 
 使用`hooks+context`的形式实现对项目状态管理的组件
 

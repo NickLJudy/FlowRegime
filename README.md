@@ -1,18 +1,18 @@
-# FlowRegime
+# flowregime
 
-FlowRegime is a component that uses `hooks+context` for state management with React.
+Flowregime is a component that uses `hooks+context` for state management with React.
 
 English | [简体中文](./README-zh_CN.md) 
 
-[![Build Status](https://travis-ci.com/NickLJudy/FlowRegime.svg?branch=main)](https://travis-ci.com/NickLJudy/FlowRegime)
+[![Build Status](https://travis-ci.com/NickLJudy/flowregime.svg?branch=main)](https://travis-ci.com/NickLJudy/flowregime)
 [![Version](https://img.shields.io/npm/v/flowregime.svg?maxAge=300&label=version&colorB=007ec6&maxAge=300)](./package.json)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/flowregime)](https://bundlephobia.com/package/flowregime)
-![GitHub](https://img.shields.io/github/license/NickLJudy/FlowRegime)
-![https://github.com/NickLJudy/FlowRegime/commits/main](https://img.shields.io/github/last-commit/NickLJudy/FlowRegime)
+![GitHub](https://img.shields.io/github/license/NickLJudy/flowregime)
+![https://github.com/NickLJudy/flowregime/commits/main](https://img.shields.io/github/last-commit/NickLJudy/flowregime)
 
 ## Installation
 
-The FlowRegime package lives in [npm](https://www.npmjs.com/get-npm). To install the latest stable version, run the following command:
+The flowregime package lives in [npm](https://www.npmjs.com/get-npm). To install the latest stable version, run the following command:
 
 ```shell
 npm i flowregime
@@ -71,4 +71,4 @@ There are only two APIs:
           * As an aside: independent contexts actually work better than shared contexts based on individual test performance.
 
 ## License
-FlowRegime is [MIT licensed](./LICENSE).
+Flowregime is [MIT licensed](./LICENSE).

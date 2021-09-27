@@ -34,7 +34,7 @@ export default [
     output: {
       file: 'dist/flowregime.js',
       format: 'umd',
-      name: 'FlowRegime',
+      name: 'flowregime',
       indent: false
     },
     external,
@@ -47,7 +47,7 @@ export default [
     output: {
       file: 'dist/flowregime.min.js',
       format: 'umd',
-      name: 'FlowRegime',
+      name: 'flowregime',
       indent: false
     },
     external,
