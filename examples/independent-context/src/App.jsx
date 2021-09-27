@@ -8,21 +8,14 @@ function forEach(num, multiple) {
 
 function turn(obj) {
   let i = 0;
-  let arr = ['a', 'b', 'c', 'd', 'e'];
 
   return function () {
-    if (i < 1) obj[arr[0]] = i;
-    if ( i < 5) {
-      obj = {};
-      obj.a = i;
-      obj[arr[i]] = 5;
-    };
 
     i++;
-    if(i===6){
-      obj = [1,2];
-    }
-    return obj;
+
+    return {
+      a:i+1,
+    };
   }
 }
 
@@ -49,10 +42,10 @@ function Father({ val, multiple }) {
   const [state, dispatch] = useCtrlState(`${innerMulti ? 'MULTI-' : ''}SIGN-${val}`, { a: 3, b: 2 });
 
   return <div onClick={() => {
-    const v = fifthDoIt();
-    console.log(v);
-    dispatch(v);
-  }}>
+      const v = fifthDoIt();
+      console.log(v);
+      dispatch(v);
+    }}>
     父组件{val}的state值：{state?.a || 0}
     <Child />
   </div>;

@@ -1,5 +1,5 @@
 import { createElement, createContext, useReducer, useContext, FunctionComponent, ComponentClass, } from 'react';
-import { typeCheck, variableRelation, compose, objAssign, isDev, IStatusVal } from './util';
+import { variableRelation, compose, isDev, } from './util';
 
 function flowregime() {
   const SingleContextType = Symbol("A separate context type.");
@@ -14,7 +14,8 @@ function flowregime() {
     [SingleContextType]?: IPlainObj;
     [propName: string]: IStatusVal;
   };
-  
+
+  type IStatusVal = object | string | number | bigint;
 
   let repos = new Map();
   repos.set(SingleContextType, createContext(null));
@@ -46,9 +47,9 @@ function flowregime() {
       if (Relation === 'SAME' && isDev) console.warn('The state shouldn\'t appear in dispatch.');
       if (Relation !== 'DIFF') return state;
 
-      obj[type] = typeCheck(state[type]) && typeCheck(value) ? objAssign(state[type] as object, value as object) : value;
+      obj[type] = value;
 
-      _globalState = objAssign(state, obj);
+      _globalState = Object.assign({}, state, obj);
 
       return _globalState;
     };
@@ -81,11 +82,7 @@ function flowregime() {
       (val: IStatusVal) => {
         let value: IPlainObj = {};
 
-        const shared: IPlainObj = _globalState?.[SingleContextType] || {};
-        
-        value[type] = typeCheck(val) ?
-          objAssign(shared[type] as IPlainObj || {}, val as object) :
-          val;
+        value[type] = val;
 
         return _dispatch({
           type: SingleContextType,

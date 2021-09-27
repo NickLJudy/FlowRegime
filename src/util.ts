@@ -1,5 +1,3 @@
-export type IStatusVal = object | string | number | bigint;
-
 export function checkType(param: any) {
   if (param === null) return null;
 
@@ -56,10 +54,6 @@ export function checkType(param: any) {
   return type;
 }
 
-export function typeCheck(param: any, type = 'object') {
-  return checkType(param) === type;
-}
-
 /**
  * @description: determine the relationship between two variables.
  * @param {any} Must
@@ -83,7 +77,7 @@ export function variableRelation(...rest: any[]) {
 
   if (checkType(param1) !== checkType(param2)) return 'DIFF';
 
-  const deterministicType = (t: string | undefined, p = param1) => typeCheck(p, t);
+  const deterministicType = (t: string | undefined, p = param1) => checkType(p) === t;
 
   if (typeof param1 !== 'object' && typeof param2 !== 'object') {
 
@@ -96,8 +90,6 @@ export function variableRelation(...rest: any[]) {
   }
 
   if (param1 === param2) return 'SAME';
-
-
 
   if (deterministicType('date') && +param1 === +param2) return 'SIMILAR';
 
@@ -140,24 +132,12 @@ export function compose(...rest: any[]) {
   return rest.reverse().reduce((acc, fn) => fn(acc));
 }
 
-export function mergeMap(...rest: any[]) {
-  return new Map(rest.reduce((acc, item) => [...acc, ...item], []));
-}
-
-export function objAssign(...rest: (object[])) {
-  return Object.assign({}, ...rest);
-}
-
 export const isDev = process.env.NODE_ENV !== 'production';
-
 
 export default {
   checkType,
-  typeCheck,
   variableRelation,
   isEqual,
   compose,
-  mergeMap,
-  objAssign,
   isDev,
 }
