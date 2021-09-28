@@ -1,33 +1,35 @@
 import { createElement, createContext, useReducer, useContext, FunctionComponent, ComponentClass, } from 'react';
 import { variableRelation, compose, isDev, } from './util';
 
+const SingleContextType = Symbol("A separate context type.");
+interface IContextProps {
+  Provider: FunctionComponent | ComponentClass;
+  Consumer: FunctionComponent | ComponentClass;
+  [propName: string]: IStatusVal | FunctionComponent | ComponentClass;
+};
+
+interface IPlainObj {
+  [SingleContextType]?: IPlainObj;
+  [propName: string]: IStatusVal;
+};
+
+type IStatusVal = object | string | number | bigint;
+
+type IChildrenProps = {
+  children: JSX.Element | JSX.Element[];
+};
+
 function flowregime() {
-  const SingleContextType = Symbol("A separate context type.");
   const multi = (param: string): boolean => String(param).indexOf('MULTI-') === 0;
-  interface IContextProps {
-    Provider: FunctionComponent | ComponentClass;
-    Consumer: FunctionComponent | ComponentClass;
-    [propName: string]: IStatusVal | FunctionComponent | ComponentClass;
-  };
-
-  interface IPlainObj {
-    [SingleContextType]?: IPlainObj;
-    [propName: string]: IStatusVal;
-  };
-
-  type IStatusVal = object | string | number | bigint;
-
   let repos = new Map();
-  repos.set(SingleContextType, createContext(null));
-  let types = new Set<symbol | string>([SingleContextType]);
 
+  repos.set(SingleContextType, createContext(null));
+
+  let types = new Set<symbol | string>([SingleContextType]);
   let _dispatch: Function;
   let _globalState: IPlainObj;
 
-  type childrenProps = {
-    children: JSX.Element | JSX.Element[];
-  };
-  function StateWrapper({ children }: childrenProps) {
+  function StateWrapper({ children }: IChildrenProps) {
     const [globalState, dispatch]: [IPlainObj, Function] = useReducer(reducer, {});
 
     _dispatch = dispatch;
