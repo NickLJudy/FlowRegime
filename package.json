@@ -1,6 +1,6 @@
 {
   "name": "flowregime",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Flowregime is a component that uses `hooks+context` for state management with React.",
   "main": "lib/flowregime.js",
   "unpkg": "dist/flowregime.js",

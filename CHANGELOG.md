@@ -1,3 +1,11 @@
+## [2.1.1](https://github.com/NickLJudy/flowregime/compare/v2.1.0...v2.1.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* Fixed inconsistencies between standalone and shared contexts ([cbcbc8b](https://github.com/NickLJudy/flowregime/commit/cbcbc8b70556f5599cce970834636a3e27364692))
+* refactoring ([68d4a32](https://github.com/NickLJudy/flowregime/commit/68d4a3241f0bf7cb1352572e3e4aafd33d6234cf))
+
 # [2.1.0](https://github.com/NickLJudy/flowregime/compare/v2.0.6...v2.1.0) (2021-09-29)
 
 
