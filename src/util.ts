@@ -134,10 +134,15 @@ export function compose(...rest: any[]) {
 
 export const isDev = process.env.NODE_ENV !== 'production';
 
+export function objAssign(...rest: (object[])) {
+  return Object.assign({}, ...rest);
+}
+
 export default {
   checkType,
   variableRelation,
   isEqual,
   compose,
+  objAssign,
   isDev,
 }

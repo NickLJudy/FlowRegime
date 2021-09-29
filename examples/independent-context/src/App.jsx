@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useCtrlState } from './../../../src/index';
 import './App.css';
 
@@ -40,21 +40,27 @@ export default function App() {
 function Father({ val, multiple }) {
   const innerMulti = multiple === 'false' ? false : Boolean(multiple);
   const [state, dispatch] = useCtrlState(`${innerMulti ? 'MULTI-' : ''}SIGN-${val}`, { a: 3, b: 2 });
+  const [innerBox,setInnerBox] = useState(false);
 
   return <div onClick={() => {
       const v = fifthDoIt();
-      console.log(v);
+      setInnerBox(true);
       dispatch(v);
     }}>
     父组件{val}的state值：{state?.a || 0}
-    <Child />
+    { innerBox && <Child /> }
   </div>;
 }
 
 function Child(props) {
-  const [state] = useCtrlState('SIGN2');
-  return <div>
+  const [state,dispatch] = useCtrlState('SIGN-2',{a:100});
+  console.log(state);
+  return <div onClick={e =>{
+    e.stopPropagation();
+
+    dispatch({a: (state.a + 1)})
+  }}>
     子组件1：
-    和父亲组件2的使用相同的state：{state?.b}
+    和父亲组件2的使用相同的state：{state?.a}
   </div>
 }

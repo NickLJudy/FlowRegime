@@ -1,7 +1,11 @@
 import { createElement, createContext, useReducer, useContext, FunctionComponent, ComponentClass, } from 'react';
-import { variableRelation, compose, isDev, } from './util';
+import { variableRelation, compose, objAssign, isDev, } from './util';
 
 const SingleContextType = Symbol("A separate context type.");
+
+type IStatusVal = object | string | number | bigint;
+type childrenProps = { children: JSX.Element | JSX.Element[]; };
+
 interface IContextProps {
   Provider: FunctionComponent | ComponentClass;
   Consumer: FunctionComponent | ComponentClass;
@@ -13,47 +17,55 @@ interface IPlainObj {
   [propName: string]: IStatusVal;
 };
 
-type IStatusVal = object | string | number | bigint;
-
-type IChildrenProps = {
-  children: JSX.Element | JSX.Element[];
-};
-
 function flowregime() {
-  const multi = (param: string): boolean => String(param).indexOf('MULTI-') === 0;
-  let repos = new Map();
+  const isMulti = (param: string): boolean => String(param).indexOf('MULTI-') === 0;
 
+  let _dispatch: Function;
+  let types = new Set<symbol | string>([SingleContextType]);
+  let repos = new Map();
   repos.set(SingleContextType, createContext(null));
 
-  let types = new Set<symbol | string>([SingleContextType]);
-  let _dispatch: Function;
-  let _globalState: IPlainObj;
-
-  function StateWrapper({ children }: IChildrenProps) {
+  function StateWrapper({ children }: childrenProps) {
     const [globalState, dispatch]: [IPlainObj, Function] = useReducer(reducer, {});
 
     _dispatch = dispatch;
 
     function reducer(state: IPlainObj, action: { type: string; value: IStatusVal; }) {
+      function comparison(
+        upLevelState: IPlainObj,
+        detailType: string,
+        isIndependent = true,
+        nextState = value): IPlainObj {
+        const Relation = variableRelation(upLevelState[detailType], nextState);
+
+        if (Relation === 'SAME' && isDev) console.warn('The state shouldn\'t appear in dispatch.');
+        if (Relation !== 'DIFF') return state;
+
+        if (isIndependent) return objAssign(upLevelState, { [detailType]: nextState });
+
+        return objAssign(
+          state,
+          { [SingleContextType]: objAssign(upLevelState, { [detailType]: value }) },
+        );
+      };
+
       let { type, value } = action;
-      types.add(type);
 
-      if (!value) {
-        repos.set(type, createContext(null));
+      if (isMulti(type)) {
+        types.add(type);
 
-        return state;
-      }
-      const Relation = variableRelation(state[type], value);
-      let obj: IPlainObj = {};
+        if (!value) {
+          repos.set(type, createContext(null));
 
-      if (Relation === 'SAME' && isDev) console.warn('The state shouldn\'t appear in dispatch.');
-      if (Relation !== 'DIFF') return state;
+          return state;
+        }
 
-      obj[type] = value;
+        return comparison(state, type);
+      };
 
-      _globalState = Object.assign({}, state, obj);
+      const shared: IPlainObj = state[SingleContextType] || {};
 
-      return _globalState;
+      return comparison(shared, type, false);
     };
 
     function renderTmp([type, store]: [string | symbol, IContextProps]) {
@@ -70,9 +82,9 @@ function flowregime() {
   }
 
   function useCtrlState(type: string, initState: IStatusVal) {
-    if (multi(type) && !types.has(type)) _dispatch({ type });
+    if (isMulti(type) && !types.has(type)) _dispatch({ type });
 
-    if (multi(type)) return [
+    if (isMulti(type)) return [
       useContext(repos.get(type)) || initState,
       (value: object | string | number | bigint) => _dispatch({ type, value }),
     ];
@@ -81,16 +93,7 @@ function flowregime() {
 
     return [
       singleState?.[type] || initState,
-      (val: IStatusVal) => {
-        let value: IPlainObj = {};
-
-        value[type] = val;
-
-        return _dispatch({
-          type: SingleContextType,
-          value,
-        });
-      }
+      (value: IStatusVal) => _dispatch({ type, value, }),
     ]
   }
 
