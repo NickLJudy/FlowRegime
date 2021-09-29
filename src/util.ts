@@ -1,6 +1,5 @@
 export function checkType(param: any) {
   if (param === null) return null;
-
   if (typeof param !== "object") return typeof param;
 
   const objTypes = [
@@ -45,12 +44,17 @@ export function checkType(param: any) {
       value: Event,
     },
   ];
+
   let type = 'object';
+
   objTypes.some(({ key, value }) => {
     const bool = param instanceof value;
+
     if (bool) type = key;
+
     return bool;
   });
+
   return type;
 }
 
@@ -115,8 +119,7 @@ export function variableRelation(...rest: any[]) {
   }
 
   return 'DIFF';
-
-}
+};
 
 export function isEqual(...rest: any[]) {
   return variableRelation(...rest) !== 'DIFF';
@@ -130,7 +133,7 @@ export function compose(...rest: any[]) {
   }
 
   return rest.reverse().reduce((acc, fn) => fn(acc));
-}
+};
 
 export const isDev = process.env.NODE_ENV !== 'production';
 

@@ -3,7 +3,7 @@ import flowregime from './core';
 const { StateWrapper, useCtrlState } = flowregime;
 
 export {
-  StateWrapper, 
+  StateWrapper,
   useCtrlState,
 };
 
