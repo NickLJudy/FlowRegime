@@ -1,5 +1,7 @@
 # flowregime
 
+![logo](./logo.jpg)
+
 Flowregime is a component that uses `hooks+context` for state management with React.
 
 English | [简体中文](./README-zh_CN.md) 
@@ -30,6 +32,8 @@ There are only two APIs:
 ### StateWrapper
 * Wrap the top layer of your application.
   ```js
+  import { StateWrapper, useCtrlState} from "flowregime";
+
   ReactDOM.render(
     <React.StrictMode>
       <StateWrapper>
