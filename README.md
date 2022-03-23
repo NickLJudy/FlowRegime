@@ -1,6 +1,6 @@
 # flowregime
 
-![logo](./logo.jpg)
+![logo](./logo.png)
 
 Flowregime is a component that uses `hooks+context` for state management with React.
 
