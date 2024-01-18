@@ -3,6 +3,7 @@ dist
 lib
 esm
 types
+package-lock.json
 
 # Logs
 logs

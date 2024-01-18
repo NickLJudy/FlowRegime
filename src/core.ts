@@ -18,7 +18,10 @@ interface IPlainObj {
 };
 
 function flowregime() {
-  const isMulti = (param: string): boolean => String(param).indexOf('MULTI-') === 0;
+  /**
+   * Cancel the judgment of "context" independent&change all to independent "context".
+  */
+  const isMulti = (param: string): boolean => true; //String(param).indexOf('MULTI-') === 0;
 
   let _dispatch: Function;
   let types = new Set<symbol | string>([SingleContextType]);
