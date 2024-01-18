@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/NickLJudy/flowregime/compare/v2.1.1...v2.1.2) (2024-01-18)
+
+
+### Bug Fixes
+
+* add logo ([6537de0](https://github.com/NickLJudy/flowregime/commit/6537de0cc99bdd09f0deb117ca5705d60c6c23dd))
+
 ## [2.1.2](https://github.com/NickLJudy/flowregime/compare/v2.1.1...v2.1.2) (2023-06-08)
 
 
